@@ -21,8 +21,8 @@ import { getPosts } from '@/api/posts';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-const posts = ref([]);
-const route = useRouter();
+const posts = ref([]); // 반응형 상태
+const router = useRouter();
 const fetchPost = () => {
 	posts.value = getPosts();
 };
@@ -30,7 +30,13 @@ const fetchPost = () => {
 fetchPost();
 
 const goPage = id => {
-	route.push(`/posts/${id}`);
+	// router.push(`/posts/${id}`); // 페이지 이동: push
+	router.push({
+		name: 'PostDetail',
+		params: {
+			id,
+		},
+	});
 };
 </script>
 
